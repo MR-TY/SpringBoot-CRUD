@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:text="${haha}"></div>
+<!--三个h4的操作-->
+<h4 th:text="${user}" th:each="user:${users}"></h4>
+<!--三个span的操作-->
+<h3>
+    <span th:each="user:${users}">[[${user}]]</span>
+</h3>
+<h1>成功</h1>
+</body>
+</html>
