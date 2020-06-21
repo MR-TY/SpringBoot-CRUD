@@ -36,8 +36,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
             public void addInterceptors(InterceptorRegistry registry) {
                 //springBoot已经注册好了静态资源，所以就不用处理静态资源
                 //增加拦截的页面，并且排除不拦截的页面
-//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").
-//                        excludePathPatterns("/index.html","/","/user/login");
+                //registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login","/","/index.html","/ty");
             }
         };
         return adapter;
