@@ -1,7 +1,5 @@
 package com.ty.listener;
 
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

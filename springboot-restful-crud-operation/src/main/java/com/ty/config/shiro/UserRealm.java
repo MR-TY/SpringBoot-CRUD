@@ -1,12 +1,10 @@
 package com.ty.config.shiro;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 
 /**
  * @author tangyu
@@ -17,6 +15,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 授权
+     *
      * @param principalCollection
      * @return
      */
@@ -37,6 +36,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 用户   认证
+     *
      * @param token
      * @return
      * @throws AuthenticationException
@@ -47,13 +47,13 @@ public class UserRealm extends AuthorizingRealm {
         String userName = "1";
         String password = "2";
         // 全局变量，只要调用登录接口，全局都能使用这个获取用户
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)token;
-        if (!usernamePasswordToken.getUsername().equals(userName)){
+        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
+        if (!usernamePasswordToken.getUsername().equals(userName)) {
             return null; //抛出异常catch (UnknownAccountException e){// 用户名为空
         }
         // 可以加密MD5加密，或者MD5盐值加密
         // 密码认证,shiro已经做了密码认证
         // 第一个参数按理说应该是从数据库获取的用户实体，保存为用户实体，这样就能通过subject获取用户实体
-        return new SimpleAuthenticationInfo("",password,"");
+        return new SimpleAuthenticationInfo("", password, "");
     }
 }
