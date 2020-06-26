@@ -25,6 +25,7 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         // 登录的用户进行授权，这一般是从数据库里面的权限表进行获取权限
         info.addStringPermission("user:add");
+        info.addStringPermission("user:update");
         // 拿到当前登录用户
        /* Subject subject = SecurityUtils.getSubject();
           User user (User)subject.getPrincipal();//拿到了当前登录用户的实体

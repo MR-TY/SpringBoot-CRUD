@@ -1,8 +1,11 @@
 package com.ty.config.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +35,8 @@ public class ShiroConfig {
 
         Map<String, String> filterMap = new LinkedHashMap<>();
         // 1.授权,设置登录用户必须有add这个权限才能进行访问此接口
-        filterMap.put("/shiro/add", "perms[user:add]");
-        filterMap.put("/shiro/update", "perms[user:update]");
+  /*      filterMap.put("/shiro/add", "perms[user:add1]");
+        filterMap.put("/shiro/update", "perms[user:update1]");*/
         // 2.登录拦截
         // 任何没有登录的用户都能访问
         // filterMap.put("/add","anon");
@@ -68,4 +71,25 @@ public class ShiroConfig {
     public ShiroDialect getShiroDialect(){
         return new ShiroDialect();
     }
+
+    /**
+     * 开启shiro的注解模式
+     * @return
+     */
+
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
+        proxyCreator.setProxyTargetClass(true);
+        return proxyCreator;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+
+
 }
