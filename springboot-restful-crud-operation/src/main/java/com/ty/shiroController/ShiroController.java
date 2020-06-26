@@ -26,7 +26,7 @@ public class ShiroController {
     }
 
     @GetMapping("/shiro/add")
-    @RequiresPermissions("user:add")
+    @RequiresPermissions("user:add1")
     public String add(Model model) {
         model.addAttribute("hi","nihao");
         return "/add";
