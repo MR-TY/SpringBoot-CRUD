@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +26,14 @@ public class ShiroController {
     }
 
     @GetMapping("/shiro/add")
+    @RequiresPermissions("user:add")
     public String add(Model model) {
         model.addAttribute("hi","nihao");
         return "/add";
     }
 
     @GetMapping("/shiro/update")
+    @RequiresPermissions("user:update")
     public String update(Model model) {
         model.addAttribute("hi","nihao");
         return "/update";
