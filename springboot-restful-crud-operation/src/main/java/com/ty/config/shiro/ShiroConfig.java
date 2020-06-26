@@ -9,9 +9,11 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author tangyu
@@ -45,7 +47,7 @@ public class ShiroConfig {
         // 登录权限：如果没有权限，跳转到登录页面
         shiroFilterFactoryBean.setLoginUrl("/toLogin");
         // 授权权限：如果没有权限
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noauthor");
+        //shiroFilterFactoryBean.setUnauthorizedUrl("/noauthor");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         return shiroFilterFactoryBean;
@@ -91,5 +93,17 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
+  /*  @Bean
+    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        Properties properties = new Properties();
+
+        *//*未授权处理页*//*
+        properties.setProperty("org.apache.shiro.authz.UnauthorizedException", "/noauthor");
+        *//*身份没有验证*//*
+        properties.setProperty("org.apache.shiro.authz.UnauthenticatedException", "/login.html");
+        resolver.setExceptionMappings(properties);
+        return resolver;
+    }*/
 
 }
