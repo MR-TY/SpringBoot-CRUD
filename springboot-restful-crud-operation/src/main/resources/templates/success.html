@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,7 +15,15 @@
 </h3>
     <p th:text="${hi}"></p>
 <h1>成功</h1>
+<p1>
+    <a th:href="@{/toLogin}">登录</a>
+</p1>
+<div shiro:hasPermission="user:add">
+    <a th:href="@{/shiro/add}">add</a>
+</div>
 
-<a th:href="@{/shiro/add}">add</a>|<a th:href="@{/shiro/update}">update</a>
+<div shiro:hasPermission="user:update">
+    <a th:href="@{/shiro/update}">update</a>
+</div>
 </body>
 </html>
